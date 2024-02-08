@@ -1,5 +1,11 @@
+import AllTasks from "./AllTasks";
+
 const Home = () => {
-  return <div>hello</div>;
+  return (
+    <div>
+      <AllTasks></AllTasks>
+    </div>
+  );
 };
 
 export default Home;

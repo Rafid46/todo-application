@@ -16,15 +16,15 @@ const Navbar = () => {
           </li>
           <li className="text-xl mr-10 font-semibold text-[#7F27FF]">
             <NavLink
-              to="dashboard"
+              to="todo"
               className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-gray-100" : ""
               }
             >
-              Dashboard
+              Todo
             </NavLink>
           </li>
-          <li className="text-xl font-semibold text-[#7F27FF]">
+          {/* <li className="text-xl font-semibold text-[#7F27FF]">
             <NavLink
               to="/login"
               className={({ isActive, isPending }) =>
@@ -33,7 +33,7 @@ const Navbar = () => {
             >
               Login
             </NavLink>
-          </li>
+          </li> */}
         </nav>
       </div>
     </div>
