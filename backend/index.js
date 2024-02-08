@@ -8,7 +8,7 @@ require("dotenv").config();
 const port = process.env.PORT || 5010;
 app.use(express.json());
 app.use(cors());
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.j1gssm8.mongodb.net/?retryWrites=true&w=majority`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -31,6 +31,52 @@ async function run() {
     app.post("/todo/tasks", async (req, res) => {
       const task = req.body;
       const result = await taskCollection.insertOne(task);
+      res.send(result);
+    });
+    // delete
+    app.delete("/todo/tasks/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await taskCollection.deleteOne(query);
+      res.send(result);
+    });
+    // patch for dnd
+    app.patch("/todo/tasks/patch/:id", async (req, res) => {
+      const taskId = req.params.id;
+      const { status } = req.body;
+      const result = await taskCollection.updateOne(
+        { _id: new ObjectId(taskId) },
+        { $set: { status } }
+      );
+      res.send(result);
+    });
+    // update task
+    app.patch("/todo/tasks/update/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const list = req.body;
+      console.log("Received data:", req.body);
+      const Info = {
+        $set: {
+          name: list.name,
+          description: list.description,
+          deadline: list.deadline,
+          priority: list.priority,
+        },
+      };
+      const result = await taskCollection.updateOne(filter, Info);
+      console.log("update result", result);
+      res.send(result);
+    });
+    router.patch("/todo/tasks/:id", async (req, res) => {
+      const id = req.params.id;
+      console.log(id);
+      const filter = { _id: id };
+      const updatedDoc = {
+        status: "Completed",
+      };
+      const result = await taskCollection.findOne(filter, updatedDoc);
+      console.log(updatedDoc);
       res.send(result);
     });
     // Connect the client to the server	(optional starting in v4.7)
