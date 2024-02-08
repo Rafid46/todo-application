@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -19,7 +20,6 @@ const CreateTask = () => {
   const onSubmit = (data) => {
     console.log(data);
     const taskData = {
-      email: user?.email,
       name: data.name,
       description: data.description,
       priority: data.priority,
@@ -37,12 +37,12 @@ const CreateTask = () => {
     <div>
       <div>
         <dialog id="my_modal_1" className="modal">
-          <div className="modal-box shadow-lg backdrop-blur-sm bg-opacity-20 bg-white">
+          <div className="modal-box shadow-lg backdrop-blur-sm bg-opacity-20 bg-white w-fit px-10">
             <div className="modal-action w-fit p-0 mx-auto">
               <form onSubmit={handleSubmit(onSubmit)} className="">
                 <div className="mb-5">
                   <form method="dialog">
-                    <button className="text-xl btn bg-transparent text-white border-none absolute hover:bg-transparent right-[5px] top-0">
+                    <button className="text-xl btn bg-transparent hover:text-red-400 text-white border-none absolute hover:bg-transparent right-[5px] top-0">
                       <RxCross1 />
                     </button>
                   </form>

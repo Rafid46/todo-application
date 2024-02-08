@@ -18,7 +18,7 @@ const Navbar = () => {
             <NavLink
               to="todo"
               className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "text-gray-100" : ""
+                isPending ? "pending" : isActive ? "text-gray-400" : ""
               }
             >
               Todo
