@@ -6,7 +6,7 @@ import CreateTask from "./CreateTask";
 const Todo = () => {
   return (
     <div
-      className="max-w-screen-xl mx-auto bg-cover bg-center bg-blue-400"
+      className="max-w-screen-sm mx-auto bg-cover bg-center "
       style={{
         backgroundImage: `url(${banner})`,
         backgroundSize: "cover",
