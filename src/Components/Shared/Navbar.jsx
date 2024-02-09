@@ -1,4 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { IoMdLogOut } from "react-icons/io";
+import { Link, NavLink } from "react-router-dom";
+
+import { FaRegUserCircle } from "react-icons/fa";
+import { AuthContext } from "../../provider/AuthProvider";
 const Navbar = () => {
   const links = (
     <div>
@@ -14,7 +19,7 @@ const Navbar = () => {
               Home
             </NavLink>
           </li>
-          <li className="text-xl mr-10 font-semibold text-[#7F27FF]">
+          {/* <li className="text-xl mr-10 font-semibold text-[#7F27FF]">
             <NavLink
               to="todo"
               className={({ isActive, isPending }) =>
@@ -23,8 +28,8 @@ const Navbar = () => {
             >
               Todo
             </NavLink>
-          </li>
-          {/* <li className="text-xl font-semibold text-[#7F27FF]">
+          </li> */}
+          <li className="text-xl font-semibold text-[#7F27FF]">
             <NavLink
               to="/login"
               className={({ isActive, isPending }) =>
@@ -33,11 +38,19 @@ const Navbar = () => {
             >
               Login
             </NavLink>
-          </li> */}
+          </li>
         </nav>
       </div>
     </div>
   );
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <div>
@@ -78,7 +91,50 @@ const Navbar = () => {
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal py-1">{links}</ul>
           </div>
-          <div className="navbar-end text-3xl"></div>
+          <div className="navbar-end text-3xl">
+            {user ? (
+              <>
+                <div className="dropdown dropdown-end">
+                  <summary tabIndex={0} className="btn btn-ghost rounded-btn">
+                    <div className="avatar">
+                      <div className="rounded-full w-[40px] h-[40px]">
+                        {user?.photoURL ? (
+                          <img
+                            className=" rounded-full border-2 border-black"
+                            src={user?.photoURL}
+                          />
+                        ) : (
+                          <div className="text-3xl">
+                            <FaRegUserCircle />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </summary>
+                  <ul
+                    tabIndex={0}
+                    className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4"
+                  >
+                    <li>
+                      <a className="cursor-none font-bold">
+                        {user?.displayName}
+                      </a>
+                    </li>
+                    <Link>
+                      <li className="flex justify-between">
+                        <button onClick={handleLogOut}>
+                          Logout
+                          <IoMdLogOut className="text-black ml-20" />
+                        </button>
+                      </li>
+                    </Link>
+                  </ul>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
       </div>
     </div>

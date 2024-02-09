@@ -11,7 +11,7 @@ const MainLayOut = () => {
       className="bg-cover bg-center"
       // style={{ backgroundImage: isToDo ? `url(${banner})` : " " }}
     >
-      {/* <Navbar></Navbar> */}
+      <Navbar></Navbar>
       <Outlet></Outlet>
     </div>
   );
