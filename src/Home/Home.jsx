@@ -15,7 +15,7 @@ const Home = () => {
       </div>
       <div
         className="bg-cover bg-center py-10 rounded-lg"
-        style={{ backgroundImage: `url(${banner2})` }}
+        style={{ backgroundImage: `url(${banner})` }}
       >
         <AllTasks></AllTasks>
       </div>
