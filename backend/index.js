@@ -68,14 +68,12 @@ async function run() {
       console.log("update result", result);
       res.send(result);
     });
-    router.patch("/todo/tasks/:id", async (req, res) => {
+    app.patch("/todo/tasks/complete/:id", async (req, res) => {
       const id = req.params.id;
       console.log(id);
-      const filter = { _id: id };
-      const updatedDoc = {
-        status: "Completed",
-      };
-      const result = await taskCollection.findOne(filter, updatedDoc);
+      const filter = { _id: new ObjectId(id) };
+      const updatedDoc = { $set: { status: "Completed" } };
+      const result = await taskCollection.updateOne(filter, updatedDoc);
       console.log(updatedDoc);
       res.send(result);
     });

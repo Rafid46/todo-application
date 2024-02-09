@@ -4,7 +4,7 @@
 /* eslint-disable react/jsx-no-undef */
 import { useState } from "react";
 import useAxiosPublic from "../hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
+
 import Swal from "sweetalert2";
 import Lottie from "lottie-react";
 import ani from "../assets/animation/todo.json";
@@ -14,6 +14,8 @@ import { CiEdit } from "react-icons/ci";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { MdOutlineCancel } from "react-icons/md";
 import { GoUpload } from "react-icons/go";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import CreateTask from "./CreateTask";
 const ShowTask = ({ task, refetch }) => {
   const axiosPublic = useAxiosPublic();
   //   const { data: tasks = [] } = useQuery({
@@ -71,6 +73,17 @@ const ShowTask = ({ task, refetch }) => {
       });
     });
     setEditing(false);
+  };
+  // complete
+  const handleComplete = () => {
+    // const complete = {
+    //   status: "Complete",
+    // };
+    axiosPublic.patch(`/todo/tasks/complete/${task._id}`).then((res) => {
+      console.log(res);
+      refetch();
+      Swal.fire("Task complete");
+    });
   };
   return (
     <div>
@@ -187,7 +200,7 @@ const ShowTask = ({ task, refetch }) => {
           </p>
           <div>
             <button
-              onClick={() => handleComplete(task)}
+              onClick={() => handleComplete(task._id)}
               className="mt-2 overflow-hidden relative w-28  py-3  bg-[#190B14] text-white border-none rounded-md text-sm font-medium cursor-pointer group"
             >
               Make it
@@ -237,6 +250,25 @@ const ShowTask = ({ task, refetch }) => {
             <MdOutlineDeleteOutline className="text-white" />
           </button>
         </div>
+      </div>
+      <div className="">
+        <div className="">
+          <button
+            onClick={() => document.getElementById("my_modal_1").showModal()}
+            className="btn hover:text-gray-900 drawer-button rounded-full bg-purple-500 border-none z-50 rounded-tr-none rounded-br-none"
+            style={{
+              position: "fixed",
+              right: "0px",
+              bottom: "30px",
+            }}
+          >
+            <span className="text-3xl text-white">
+              <IoIosAddCircleOutline />
+            </span>
+            <p className=" text-white"> create</p>
+          </button>
+        </div>
+        <CreateTask></CreateTask>
       </div>
     </div>
   );

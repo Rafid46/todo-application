@@ -14,7 +14,7 @@ const Home = () => {
         <p className="bg-[#7F27FF] ml-2 w-[20px] h-[20px] rounded-full"></p>
       </div>
       <div
-        className="bg-cover bg-center w-full  py-10 rounded-lg"
+        className="bg-cover bg-center py-10 rounded-lg"
         style={{ backgroundImage: `url(${banner2})` }}
       >
         <AllTasks></AllTasks>

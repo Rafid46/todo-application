@@ -28,8 +28,7 @@ const CreateTask = () => {
     };
     axiosPublic.post("/todo/tasks", taskData).then((res) => {
       console.log(res.data, "task added");
-      reset(), Swal.fire("task added");
-      queryClient.invalidateQueries(["tasks"]);
+      reset(), queryClient.invalidateQueries(["tasks"]);
     });
   };
 
@@ -37,7 +36,7 @@ const CreateTask = () => {
     <div>
       <div>
         <dialog id="my_modal_1" className="modal">
-          <div className="modal-box shadow-lg backdrop-blur-sm bg-opacity-20 bg-white w-fit px-10">
+          <div className="modal-box shadow-lg backdrop-blur-sm bg-opacity-20 bg-white w-fit px-10 rounded-md">
             <div className="modal-action w-fit p-0 mx-auto">
               <form onSubmit={handleSubmit(onSubmit)} className="">
                 <div className="mb-5">
@@ -94,10 +93,9 @@ const CreateTask = () => {
                 <br />
                 <button
                   type="submit"
-                  method="dialog"
-                  className="btn inline-block shrink-0 rounded-md bg-transparent px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-blue-500"
+                  className="bg-purple-500 text-sm text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-purple-700 active:bg-purple-900 focus:outline-none"
                 >
-                  Create
+                  Create task
                 </button>
               </form>
             </div>

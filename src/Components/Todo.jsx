@@ -1,8 +1,5 @@
-/* eslint-disable react/jsx-key */
-import { IoIosAddCircleOutline } from "react-icons/io";
 // import { IoIosArrowDropright } from "react-icons/io";
-import banner from "../assets/images/banner.jpg";
-import CreateTask from "./CreateTask";
+
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
@@ -28,30 +25,12 @@ const Todo = () => {
         {tasks
           .filter((task) => task?.status === "Todo")
           .map((task) => (
-            <p className="text-3xl text-black">{task?.length}</p>
+            <p key={task.id} className="text-3xl text-black">
+              {task?.length}
+            </p>
           ))}
       </div>
-      <div className="flex items-center justify-evenly">
-        <div className="">
-          <div className="">
-            <button
-              onClick={() => document.getElementById("my_modal_1").showModal()}
-              className="btn drawer-button rounded-full bg-white z-50 rounded-tr-none rounded-br-none"
-              style={{
-                position: "fixed",
-                right: "0px",
-                bottom: "30px",
-              }}
-            >
-              <span className="text-3xl">
-                <IoIosAddCircleOutline />
-              </span>
-              create
-            </button>
-          </div>
-          <CreateTask></CreateTask>
-        </div>
-      </div>
+      <div className="flex items-center justify-evenly"></div>
     </div>
   );
 };
