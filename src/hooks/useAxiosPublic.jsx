@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-  baseURL: "http://localhost:5010",
+  baseURL: "https://backend-psi-livid.vercel.app",
 });
 const useAxiosPublic = () => {
   return axiosPublic;
