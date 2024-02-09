@@ -213,7 +213,7 @@ const ShowTask = ({ task, refetch }) => {
                 </span>
               </button>
             ) : (
-              <button className="mt-2 overflow-hidden relative w-28  py-3  bg-[#190B14] text-white border-none rounded-md text-sm font-medium cursor-pointer group">
+              <button className="mt-2 overflow-hidden relative w-28  py-3  bg-purple-500 text-white border-none rounded-md text-sm font-medium cursor-pointer group">
                 Completed
                 <span className="absolute w-28 h-28 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>
                 <span className="absolute w-28 h-28 -top-8 -left-2 bg-purple-400 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-left"></span>
@@ -277,7 +277,7 @@ const ShowTask = ({ task, refetch }) => {
             <span className="text-3xl text-white">
               <IoIosAddCircleOutline />
             </span>
-            <p className=" text-white"> create</p>
+            <p className=" text-white">create</p>
           </button>
         </div>
         <CreateTask></CreateTask>

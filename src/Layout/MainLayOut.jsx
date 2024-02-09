@@ -8,7 +8,7 @@ const MainLayOut = () => {
   const isToDo = location.pathname === "/todo";
   return (
     <div
-      className="bg-cover bg-center max-w-screen-[1200px] mx-auto"
+      className="bg-cover bg-center"
       // style={{ backgroundImage: isToDo ? `url(${banner})` : " " }}
     >
       {/* <Navbar></Navbar> */}

@@ -34,10 +34,12 @@ const AllTasks = () => {
           <div className="w-4 h-4 rounded-full bg-green-400 animate-bounce [animation-delay:-.5s]"></div>
         </div>
       ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-3">
-          {tasks.map((task) => (
-            <ShowTask task={task} refetch={refetch}></ShowTask>
-          ))}
+        <div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 max-w-screen-xl mx-auto gap-10">
+            {tasks.map((task) => (
+              <ShowTask task={task} refetch={refetch}></ShowTask>
+            ))}
+          </div>
         </div>
       )}
     </div>
