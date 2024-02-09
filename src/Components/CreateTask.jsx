@@ -5,21 +5,25 @@ import Swal from "sweetalert2";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { RxCross1 } from "react-icons/rx";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const CreateTask = () => {
+  const { user } = useContext(AuthContext);
   const { register, handleSubmit, reset } = useForm();
   const axiosPublic = useAxiosPublic();
   const queryClient = useQueryClient();
   const { refetch } = useQuery({
     queryKey: ["tasks"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/todo/tasks");
+      const res = await axiosPublic.get(`/todo/tasks?email=${user?.email}`);
       return res.data;
     },
   });
   const onSubmit = (data) => {
     console.log(data);
     const taskData = {
+      email: user?.email,
       name: data.name,
       description: data.description,
       priority: data.priority,
@@ -83,9 +87,6 @@ const CreateTask = () => {
                   Deadline
                 </label>
                 <input
-                  // onChange={(e) =>
-                  //   setTask({ ...task, id: uuidv4(), name: e.target.value })
-                  // }
                   {...register("deadline")}
                   type="date"
                   className="mb-5 w-60 p-4 py-2 border-2 rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"

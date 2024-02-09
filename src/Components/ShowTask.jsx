@@ -16,6 +16,7 @@ import { MdOutlineCancel } from "react-icons/md";
 import { GoUpload } from "react-icons/go";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import CreateTask from "./CreateTask";
+import { useQueryClient } from "@tanstack/react-query";
 const ShowTask = ({ task, refetch }) => {
   const axiosPublic = useAxiosPublic();
   //   const { data: tasks = [] } = useQuery({
@@ -27,13 +28,6 @@ const ShowTask = ({ task, refetch }) => {
   //   });
   const [editing, setEditing] = useState(false);
   const [inputValue, setInputValue] = useState(task);
-  //   const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
-  //     type: "task",
-  //     item: { id: task._id },
-  //     collect: (monitor) => ({
-  //       isDragging: !!monitor.isDragging(),
-  //     }),
-  //   }));
   console.log(inputValue);
   //   console.log(isDragging);
   const handleDelete = (id) => {
@@ -49,7 +43,7 @@ const ShowTask = ({ task, refetch }) => {
       if (result.isConfirmed) {
         axiosPublic.delete(`/todo/tasks/${id}`).then((res) => {
           console.log(res.data);
-          refetch();
+          queryClient.invalidateQueries();
           Swal.fire({
             title: "Deleted!",
             text: "Your task has been deleted",
@@ -63,7 +57,7 @@ const ShowTask = ({ task, refetch }) => {
   const handleUpdate = (id) => {
     axiosPublic.patch(`/todo/tasks/update/${id}`, inputValue).then((res) => {
       console.log(res.data);
-      refetch();
+      queryClient.invalidateQueries();
       Swal.fire({
         position: "bottom-end",
         icon: "success",
@@ -74,6 +68,7 @@ const ShowTask = ({ task, refetch }) => {
     });
     setEditing(false);
   };
+  const queryClient = useQueryClient();
   // complete
   const handleComplete = () => {
     // const complete = {
@@ -81,7 +76,8 @@ const ShowTask = ({ task, refetch }) => {
     // };
     axiosPublic.patch(`/todo/tasks/complete/${task._id}`).then((res) => {
       console.log(res);
-      refetch();
+      queryClient.invalidateQueries();
+
       Swal.fire("Task complete");
     });
   };
@@ -201,7 +197,7 @@ const ShowTask = ({ task, refetch }) => {
           <div>
             {task?.status === "Todo" ? (
               <button
-                onClick={() => handleComplete(task._id)}
+                onClick={() => handleComplete(task)}
                 className="mt-2 overflow-hidden relative w-28  py-3  bg-[#190B14] text-white border-none rounded-md text-sm font-medium cursor-pointer group"
               >
                 Make it
@@ -262,25 +258,6 @@ const ShowTask = ({ task, refetch }) => {
             <MdOutlineDeleteOutline className="text-white" />
           </button>
         </div>
-      </div>
-      <div className="">
-        <div className="">
-          <button
-            onClick={() => document.getElementById("my_modal_1").showModal()}
-            className="btn hover:text-gray-900 drawer-button rounded-full bg-purple-500 border-none z-50 rounded-tr-none rounded-br-none"
-            style={{
-              position: "fixed",
-              right: "0px",
-              bottom: "30px",
-            }}
-          >
-            <span className="text-3xl text-white">
-              <IoIosAddCircleOutline />
-            </span>
-            <p className=" text-white">create</p>
-          </button>
-        </div>
-        <CreateTask></CreateTask>
       </div>
     </div>
   );

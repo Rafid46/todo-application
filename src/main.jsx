@@ -9,6 +9,7 @@ import Todo from "./Components/Todo";
 import AuthProvider from "./provider/AuthProvider";
 import Login from "./Users/Login";
 import Register from "./Users/Register";
+import PrivateRoute from "./PrivateRoute";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -17,7 +18,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: (
+          <PrivateRoute>
+            <Home></Home>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/todo",

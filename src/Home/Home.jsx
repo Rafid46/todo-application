@@ -33,13 +33,12 @@ const Home = () => {
         <p className="text-xl text-blue-400 font-semibold">
           Completed tasks:
           <span>
-            {" "}
             {tasks?.filter((task) => task?.status === "Completed").length}
           </span>
         </p>
       </p>
       <div
-        className="bg-cover bg-center py-10 rounded-lg"
+        className="bg-cover bg-center h-[900px] py-10 rounded-lg"
         style={{ backgroundImage: `url(${banner})` }}
       >
         <AllTasks></AllTasks>
